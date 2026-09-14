@@ -126,12 +126,12 @@ export function ProductsSection() {
 
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative">
           {/* Left: Single Large Bottle Image */}
-          <div 
+          <div
             className="prod-bottle invisible w-full lg:w-1/2 relative flex justify-center lg:justify-end"
           >
             <div className="relative w-[70%] lg:w-[80%] aspect-[1/2] max-h-[80vh]">
               <Image
-                src="/images/product-bottle.jpg"
+                src="/bottle.png"
                 alt="Aqua Mountain Signature Bottle"
                 fill
                 sizes="(max-width: 1024px) 70vw, 40vw"
@@ -142,18 +142,18 @@ export function ProductsSection() {
           </div>
 
           {/* Right: Products & Prices List */}
-          <div 
+          <div
             className="prod-list-container invisible w-full lg:w-1/2 flex flex-col justify-center"
           >
             <div className="flex flex-col gap-10 w-full max-w-md mx-auto lg:mx-0">
               {products.map((product, index) => (
-                <div 
+                <div
                   key={product.id}
                   className="prod-item invisible group relative"
                 >
-                  <Link 
+                  <Link
                     href={`https://wa.me/918979776596?text=Hi Aqua Mountain, I'd like to order the ${product.size} bottle.`}
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="block"
                   >
@@ -164,20 +164,18 @@ export function ProductsSection() {
                       </div>
                       <p className="text-2xl md:text-4xl font-light text-pure-black/80">{product.price}</p>
                     </div>
-                    
+
                     {/* Hover state line */}
                     <div className="absolute bottom-0 left-0 h-[1px] bg-pure-black w-0 group-hover:w-full transition-all duration-700 ease-out z-20"></div>
                   </Link>
                 </div>
               ))}
-              
+
               <div
                 className="prod-info invisible mt-8 pt-8 flex flex-col"
               >
                 <p className="text-sm text-pure-black/50 leading-relaxed">
-                  Click on any size to place an order via WhatsApp. 
-                  <br className="hidden md:block" />
-                  Free delivery on all orders above ₹100.
+                  Click on any size to place an order via WhatsApp.
                 </p>
               </div>
             </div>
