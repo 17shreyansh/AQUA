@@ -79,9 +79,22 @@ export function Footer() {
         </div>
         
         {/* Bottom Line */}
-        <div className="flex flex-col md:flex-row items-center justify-between text-[10px] uppercase tracking-[0.2em] text-ivory/30 pt-8 border-t border-ivory/10">
+        <div className="flex flex-col lg:flex-row items-center justify-between text-[10px] uppercase tracking-[0.2em] text-ivory/30 pt-8 border-t border-ivory/10 gap-4 lg:gap-0">
           <p>&copy; {new Date().getFullYear()} AQUA MOUNTAIN. ALL RIGHTS RESERVED.</p>
-          <div className="flex items-center gap-8 mt-4 md:mt-0">
+          
+          <p>
+            DEVELOPED BY{" "}
+            <a 
+              href="https://affobe.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-ivory/50 hover:text-gold transition-colors"
+            >
+              AFFOBE
+            </a>
+          </p>
+
+          <div className="flex items-center gap-8">
             <Link href="#" className="hover:text-ivory/60 transition-colors">PRIVACY</Link>
             <Link href="#" className="hover:text-ivory/60 transition-colors">TERMS</Link>
           </div>
