@@ -1,55 +1,79 @@
-import { Droplets, Mountain, ShieldCheck, Leaf } from "lucide-react";
+"use client";
+
+import { motion } from "framer-motion";
 
 const values = [
   {
-    icon: Droplets,
     title: "100% PURE",
-    description: "Every drop is rigorously filtered to ensure uncompromising purity and clarity.",
+    description: "Rigorously filtered for uncompromising clarity.",
     number: "01",
   },
   {
-    icon: Mountain,
     title: "NATURAL MINERALS",
-    description: "Enriched with essential minerals that provide a crisp, refreshing taste.",
+    description: "Enriched with essential minerals for a crisp taste.",
     number: "02",
   },
   {
-    icon: ShieldCheck,
     title: "SAFE & TRUSTED",
-    description: "Quality assured through advanced purification and strict hygiene standards.",
+    description: "Quality assured through strict hygiene standards.",
     number: "03",
   },
   {
-    icon: Leaf,
     title: "ECO FRIENDLY",
-    description: "Committed to responsible packaging and sustainable environmental practices.",
+    description: "Committed to sustainable environmental practices.",
     number: "04",
   },
 ];
 
 export function BrandValuesSection() {
   return (
-    <section className="bg-black text-white border-y border-white/10">
-      <div className="container mx-auto px-6 md:px-12 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-12 gap-y-16">
-          {values.map((value, index) => {
-            const Icon = value.icon;
-            return (
-              <div key={index} className="flex flex-col group relative">
-                {/* Decorative Number */}
-                <div className="absolute -top-6 -left-4 text-[100px] font-heading font-bold text-white/5 z-0 select-none transition-transform duration-500 group-hover:-translate-y-2">
+    <section className="bg-pure-black text-ivory py-32 md:py-48">
+      <div className="container mx-auto px-6 md:px-12">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-24 md:mb-32"
+        >
+          <h2 className="text-3xl md:text-5xl font-heading font-light tracking-tight">
+            PURE BY NATURE.<br />
+            PRECISE BY PROCESS.
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-16">
+          {values.map((value, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col relative pr-8 lg:pr-12 group"
+            >
+              {/* Vertical divider (except last on desktop) */}
+              <div className={`hidden lg:block absolute top-0 right-0 w-[1px] h-full bg-ivory/10 ${index === values.length - 1 ? '!hidden' : ''}`}></div>
+              
+              <div className="flex items-end gap-3 mb-8">
+                <span className="text-micro text-ivory/40">
                   {value.number}
-                </div>
-                
-                <div className="relative z-10 flex flex-col h-full border-l border-gold/30 pl-6 py-2 transition-colors duration-300 group-hover:border-gold">
-                  <Icon className="w-8 h-8 text-gold mb-6 stroke-[1.5]" />
-                  <h3 className="text-xl font-heading font-bold tracking-wide mb-3">{value.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{value.description}</p>
-                </div>
+                </span>
+                <span className="w-1.5 h-1.5 bg-gold rounded-full mb-1"></span>
               </div>
-            );
-          })}
+              
+              <h3 className="text-sm font-sans uppercase tracking-[0.15em] mb-4 text-ivory/90 group-hover:text-ivory transition-colors">
+                {value.title}
+              </h3>
+              
+              <p className="text-ivory/50 text-sm leading-relaxed max-w-[240px] font-light group-hover:text-ivory/70 transition-colors">
+                {value.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
+
       </div>
     </section>
   );

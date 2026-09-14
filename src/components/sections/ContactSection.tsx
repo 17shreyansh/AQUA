@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export function ContactSection() {
   const [selectedProduct, setSelectedProduct] = useState("800 ML");
@@ -14,109 +14,102 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white text-black">
+    <section id="contact" className="py-32 md:py-48 bg-pure-black text-ivory">
       <div className="container mx-auto px-6 md:px-12">
         
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           
           {/* Contact Information */}
-          <div className="w-full lg:w-1/2">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="w-8 h-[1px] bg-gold"></span>
-              <span className="uppercase tracking-widest text-sm font-semibold text-gold-dark">Reach Us</span>
-            </div>
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+            >
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light leading-[1.1] mb-16 tracking-tight">
+                Let&#39;s start a <br />
+                <span className="text-gold">pure conversation.</span>
+              </h2>
+            </motion.div>
             
-            <h2 className="text-4xl md:text-5xl font-heading font-bold leading-tight mb-12">
-              Let&#39;s start a <br />
-              <span className="italic font-accent font-normal text-gray-500">pure conversation.</span>
-            </h2>
-            
-            <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-sm bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 text-gold-dark" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-lg mb-1">Phone</h4>
-                  <p className="text-gray-600 mb-2">Mon-Sat, 9AM to 6PM</p>
-                  <div className="flex flex-col gap-1">
-                    <Link href="tel:+918979776596" className="text-lg font-medium hover:text-gold transition-colors">+91 89797 76596</Link>
-                    <Link href="tel:+919719131246" className="text-lg font-medium hover:text-gold transition-colors">+91 97191 31246</Link>
-                  </div>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="flex flex-col gap-12"
+            >
+              <div className="flex flex-col border-l border-ivory/20 pl-6 hover:border-gold transition-colors duration-500">
+                <h4 className="text-micro text-ivory/50 mb-3">PHONE</h4>
+                <div className="flex flex-col gap-1">
+                  <Link href="tel:+918979776596" className="text-lg font-light hover:text-gold transition-colors">+91 89797 76596</Link>
+                  <Link href="tel:+919719131246" className="text-lg font-light hover:text-gold transition-colors">+91 97191 31246</Link>
                 </div>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-sm bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5 text-gold-dark" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-lg mb-1">Email</h4>
-                  <p className="text-gray-600 mb-2">For wholesale and general inquiries</p>
-                  <Link href="mailto:aquamountain412@gmail.com" className="text-lg font-medium hover:text-gold transition-colors">
-                    aquamountain412@gmail.com
-                  </Link>
-                </div>
+              <div className="flex flex-col border-l border-ivory/20 pl-6 hover:border-gold transition-colors duration-500">
+                <h4 className="text-micro text-ivory/50 mb-3">EMAIL</h4>
+                <Link href="mailto:aquamountain412@gmail.com" className="text-lg font-light hover:text-gold transition-colors">
+                  aquamountain412@gmail.com
+                </Link>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-sm bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-gold-dark" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-lg mb-1">Address</h4>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    Plot Sai Shyam Colony,<br />
-                    Gram Mauja Runkata,<br />
-                    Agra – 282007,<br />
-                    Uttar Pradesh, India
-                  </p>
-                </div>
+              <div className="flex flex-col border-l border-ivory/20 pl-6 hover:border-gold transition-colors duration-500">
+                <h4 className="text-micro text-ivory/50 mb-3">ADDRESS</h4>
+                <p className="text-lg font-light leading-relaxed text-ivory/80">
+                  Plot Sai Shyam Colony,<br />
+                  Gram Mauja Runkata, Agra<br />
+                  Uttar Pradesh, India
+                </p>
               </div>
-            </div>
+            </motion.div>
           </div>
           
           {/* Purchase Enquiry Flow */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center">
-            <div className="bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100 shadow-sm">
-              <h3 className="text-2xl font-heading font-bold mb-2">Order via WhatsApp</h3>
-              <p className="text-gray-600 mb-8">Select a product size and send us a message to place your order directly.</p>
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="bg-charcoal p-10 md:p-16 w-full max-w-xl mx-auto lg:ml-auto relative"
+            >
+              <h3 className="text-xl font-heading font-light tracking-wide mb-2 text-ivory">Direct Order</h3>
+              <p className="text-ivory/50 font-light mb-12 text-sm">Select a product size and request an order via WhatsApp.</p>
               
-              <div className="space-y-6">
+              <div className="flex flex-col gap-10">
                 <div>
-                  <label className="block text-sm font-semibold tracking-wide uppercase mb-4 text-gray-800">Select Bottle Size</label>
-                  <div className="grid grid-cols-3 gap-3">
+                  <label className="block text-micro text-ivory/40 mb-6">SELECT BOTTLE SIZE</label>
+                  <div className="flex gap-4 border-b border-ivory/10 pb-2">
                     {["275 ML", "800 ML", "1200 ML"].map((size) => (
                       <button
                         key={size}
                         onClick={() => setSelectedProduct(size)}
-                        className={`py-3 px-2 border rounded-sm font-medium transition-all ${
+                        className={`text-sm tracking-[0.1em] transition-all duration-300 relative pb-2 ${
                           selectedProduct === size 
-                            ? "bg-black text-white border-black" 
-                            : "bg-white text-gray-700 border-gray-200 hover:border-gold hover:text-gold-dark"
+                            ? "text-ivory" 
+                            : "text-ivory/40 hover:text-ivory/70"
                         }`}
                       >
                         {size}
+                        {selectedProduct === size && (
+                          <motion.div layoutId="underline" className="absolute bottom-0 left-0 w-full h-[1px] bg-gold"></motion.div>
+                        )}
                       </button>
                     ))}
                   </div>
                 </div>
                 
-                <div className="pt-4">
-                  <Button 
-                    onClick={handleWhatsAppOrder}
-                    className="w-full h-14 text-lg bg-[#25D366] hover:bg-[#1ebd5a] text-white rounded-sm font-semibold tracking-wide flex items-center gap-2"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    ORDER {selectedProduct} NOW
-                  </Button>
-                </div>
-                
-                <p className="text-xs text-center text-gray-500 mt-4">
-                  You will be redirected to WhatsApp to complete your purchase inquiry.
-                </p>
+                <button 
+                  onClick={handleWhatsAppOrder}
+                  className="group flex items-center justify-between w-full border border-ivory/20 px-8 py-5 hover:bg-ivory hover:text-pure-black hover:border-ivory transition-all duration-500"
+                >
+                  <span className="text-xs uppercase tracking-[0.2em] font-medium">ORDER VIA WHATSAPP</span>
+                  <ArrowRight className="w-4 h-4 text-ivory/50 group-hover:text-pure-black transition-colors" />
+                </button>
               </div>
-            </div>
+            </motion.div>
           </div>
           
         </div>

@@ -1,36 +1,33 @@
+"use client";
+
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
-import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white pt-24 pb-12 border-t border-white/10">
+    <footer className="bg-pure-black text-ivory pt-32 pb-12 border-t border-ivory/10">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
+        
+        <div className="flex flex-col items-center text-center mb-32">
+          <Link href="/" className="inline-block mb-16 opacity-80 hover:opacity-100 transition-opacity duration-500">
+            <Logo width={160} />
+          </Link>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-light tracking-widest text-ivory/90">
+            PURE AS NATURE
+          </h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-24 mb-32 max-w-6xl mx-auto border-t border-ivory/10 pt-16">
           
-          {/* Brand Column */}
-          <div className="flex flex-col gap-6">
-            <Link href="/" className="inline-block">
-              <Logo width={160} />
-            </Link>
-            <div>
-              <p className="text-lg font-heading font-bold tracking-wide">PURE AS NATURE</p>
-              <p className="text-sm tracking-wide text-gray-400 mt-1">SAFE FOR LIFE</p>
-            </div>
-            <p className="text-gray-500 text-sm mt-4">
-              Premium packaged drinking water enriched with natural minerals.
-            </p>
-          </div>
-          
-          {/* Navigation Column */}
-          <div>
-            <h4 className="font-heading font-bold uppercase tracking-widest text-sm mb-6 text-gold">Navigation</h4>
-            <ul className="space-y-4">
-              {["Home", "About Us", "Products", "Contact"].map((link) => (
+          {/* Navigation */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-micro text-ivory/50 mb-8">NAVIGATION</h4>
+            <ul className="flex flex-col gap-4">
+              {["HOME", "ABOUT", "WATER", "PRODUCTS", "CONTACT"].map((link) => (
                 <li key={link}>
                   <Link 
-                    href={`#${link.toLowerCase().replace(" us", "")}`} 
-                    className="text-gray-400 hover:text-white transition-colors"
+                    href={`#${link.toLowerCase()}`} 
+                    className="text-xs tracking-[0.2em] text-ivory/70 hover:text-gold transition-colors duration-300"
                   >
                     {link}
                   </Link>
@@ -39,33 +36,41 @@ export function Footer() {
             </ul>
           </div>
           
-          {/* Contact Column */}
-          <div>
-            <h4 className="font-heading font-bold uppercase tracking-widest text-sm mb-6 text-gold">Contact</h4>
-            <ul className="space-y-4 text-gray-400">
+          {/* Contact */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-micro text-ivory/50 mb-8">CONTACT</h4>
+            <ul className="flex flex-col gap-4 text-xs tracking-[0.1em] text-ivory/70">
               <li>
-                <Link href="tel:+918979776596" className="hover:text-white transition-colors">+91 89797 76596</Link>
+                <Link href="tel:+918979776596" className="hover:text-gold transition-colors">+91 89797 76596</Link>
               </li>
               <li>
-                <Link href="mailto:aquamountain412@gmail.com" className="hover:text-white transition-colors">aquamountain412@gmail.com</Link>
+                <Link href="mailto:aquamountain412@gmail.com" className="hover:text-gold transition-colors">aquamountain412@gmail.com</Link>
               </li>
-              <li className="leading-relaxed pt-2">
-                Plot Sai Shyam Colony,<br />
-                Gram Mauja Runkata,<br />
-                Agra – 282007, U.P.
+            </ul>
+          </div>
+
+          {/* Social */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-micro text-ivory/50 mb-8">SOCIAL</h4>
+            <ul className="flex flex-col gap-4 text-xs tracking-[0.2em] text-ivory/70">
+              <li>
+                <Link href="#" className="hover:text-gold transition-colors">INSTAGRAM</Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-gold transition-colors">FACEBOOK</Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-gold transition-colors">LINKEDIN</Link>
               </li>
             </ul>
           </div>
           
-          {/* CTA Column */}
-          <div>
-            <h4 className="font-heading font-bold uppercase tracking-widest text-sm mb-6 text-gold">Ready to Order?</h4>
-            <p className="text-gray-400 text-sm mb-6">
-              Experience the purity of Aqua Mountain water today.
-            </p>
+          {/* Action */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-micro text-ivory/50 mb-8">ORDER</h4>
             <Link 
               href="#contact"
-              className="inline-flex items-center justify-center bg-gold hover:bg-gold-light text-black font-semibold rounded-sm tracking-wide w-full h-10 transition-colors"
+              className="text-xs tracking-[0.2em] text-pure-black bg-ivory hover:bg-ivory/90 px-8 py-3 transition-colors duration-500"
             >
               BUY NOW
             </Link>
@@ -73,14 +78,15 @@ export function Footer() {
           
         </div>
         
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Aqua Mountain. All rights reserved.</p>
-          <div className="flex items-center gap-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+        {/* Bottom Line */}
+        <div className="flex flex-col md:flex-row items-center justify-between text-[10px] uppercase tracking-[0.2em] text-ivory/30 pt-8 border-t border-ivory/10">
+          <p>&copy; {new Date().getFullYear()} AQUA MOUNTAIN. ALL RIGHTS RESERVED.</p>
+          <div className="flex items-center gap-8 mt-4 md:mt-0">
+            <Link href="#" className="hover:text-ivory/60 transition-colors">PRIVACY</Link>
+            <Link href="#" className="hover:text-ivory/60 transition-colors">TERMS</Link>
           </div>
         </div>
+
       </div>
     </footer>
   );

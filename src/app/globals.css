@@ -9,13 +9,21 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-heading: var(--font-montserrat);
-  --font-accent: var(--font-playfair);
-  
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-gold-dark: var(--gold-dark);
-  --color-mountain-blue: var(--mountain-blue);
-  --color-mountain-dark: var(--mountain-dark);
+  
+  /* Natural/Premium colors */
+  --color-ivory: #FAF9F6;
+  --color-charcoal: #111111;
+  --color-pure-black: #000000;
+  
+  /* Photography secondary */
+  --color-alpine-blue: #1C3347;
+  --color-glacier-blue: #A2B9C8;
+  --color-stone: #8E9190;
+  --color-forest: #2A3B32;
+  --color-fog: #D1D5D6;
   
   --color-border: var(--border);
   --color-input: var(--input);
@@ -28,15 +36,12 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  --background: #FAF9F6;
+  --foreground: #111111;
   
   --gold: #d4af37;
   --gold-light: #f3e5ab;
   --gold-dark: #aa8c2c;
-  
-  --mountain-blue: #1e3a5f;
-  --mountain-dark: #0f1c2e;
   
   --border: #e5e7eb;
   --input: #e5e7eb;
@@ -46,8 +51,8 @@
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
+  --background: #000000;
+  --foreground: #FAF9F6;
   
   --border: #27272a;
   --input: #27272a;
@@ -63,5 +68,24 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight;
+  }
+}
+
+/* Custom Editorial Utilities */
+@layer utilities {
+  .text-editorial {
+    @apply tracking-normal;
+  }
+  .text-micro {
+    @apply text-[10px] sm:text-xs uppercase tracking-[0.2em] font-sans font-medium;
+  }
+  .text-label {
+    @apply text-xs sm:text-sm uppercase tracking-[0.15em] font-sans;
+  }
+  .divider-thin {
+    @apply h-[1px] w-full bg-border/20;
+  }
+  .divider-thin-v {
+    @apply w-[1px] h-full bg-border/20;
   }
 }

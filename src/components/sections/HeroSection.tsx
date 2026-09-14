@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative w-full h-screen min-h-[700px] flex items-center overflow-hidden">
-      {/* Background Image */}
+    <section id="home" className="relative w-full h-[100dvh] min-h-[750px] flex flex-col items-center justify-center overflow-hidden bg-charcoal">
+      {/* Crisp Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/bg-updated.png"
@@ -19,81 +18,84 @@ export function HeroSection() {
           className="object-cover object-center"
           quality={100}
         />
-        {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10"></div>
-        <div className="absolute inset-0 bg-black/20 z-10"></div>
+        {/* Uniform subtle darkening overlay to ensure white text pops everywhere */}
+        <div className="absolute inset-0 bg-pure-black/40 z-10"></div>
+        {/* Soft bottom gradient to ground the section */}
+        <div className="absolute inset-0 bg-gradient-to-t from-pure-black/80 via-transparent to-transparent z-10"></div>
       </div>
 
-      <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
-        <div className="max-w-2xl mt-16 md:mt-0">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h2 className="text-gold tracking-widest text-sm font-semibold uppercase mb-4 flex items-center gap-4">
-              <span className="w-8 h-[1px] bg-gold"></span>
-              Aqua Mountain
-            </h2>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-heading font-bold text-white leading-tight mb-6"
-          >
-            PURE AS <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-light to-gold">NATURE</span>
-            <br />
-            SAFE FOR LIFE
-          </motion.h1>
+      <div className="container mx-auto px-6 relative z-20 flex flex-col items-center justify-center text-center mt-12 md:mt-20">
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="mb-8"
+        >
+          <h2 className="text-micro text-ivory/90 uppercase tracking-[0.4em]">
+            AQUA MOUNTAIN
+          </h2>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, delay: 0.2, ease: "easeOut" }}
+          className="mb-10 w-full max-w-5xl"
+        >
+          <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-heading font-light text-ivory leading-[0.9] tracking-tighter">
+            PURE AS <span className="text-gold block sm:inline mt-2 sm:mt-0">NATURE</span>
+          </h1>
+        </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="text-gray-300 text-lg md:text-xl mb-10 max-w-lg leading-relaxed font-light"
-          >
-            Experience the crisp, refreshing taste of natural mineral water, crafted for your well-being.
-          </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+          className="mb-14"
+        >
+          <p className="text-ivory/80 text-sm md:text-base max-w-lg mx-auto leading-relaxed font-light tracking-wide">
+            Experience the crisp, refreshing taste of natural mineral water. Sourced from the highest, untouched alpine peaks.
+          </p>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4"
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-6 items-center w-full sm:w-auto"
+        >
+          <Link 
+            href="#products"
+            className="text-label text-pure-black bg-ivory hover:bg-gold font-medium px-12 py-4 transition-colors duration-500 w-full sm:w-auto text-center"
           >
-            <Link 
-              href="#products"
-              className="inline-flex items-center justify-center bg-gold hover:bg-gold-light text-black font-semibold rounded-sm tracking-wide h-14 px-8 transition-colors"
-            >
-              EXPLORE OUR WATER
-            </Link>
-            <Link 
-              href="#contact"
-              className="inline-flex items-center justify-center border border-white/30 text-white hover:bg-white/10 rounded-sm font-semibold tracking-wide backdrop-blur-sm h-14 px-8 transition-colors"
-            >
-              BUY NOW
-            </Link>
-          </motion.div>
-        </div>
+            DISCOVER
+          </Link>
+          <Link 
+            href="#contact"
+            className="text-label text-ivory border border-ivory/30 hover:border-ivory hover:bg-ivory/10 px-12 py-4 transition-all duration-500 w-full sm:w-auto text-center"
+          >
+            SHOP NOW
+          </Link>
+        </motion.div>
+        
       </div>
       
-      {/* Scroll indicator */}
+      {/* Scroll indicator - Bottom Center */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4"
       >
-        <span className="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
-        <div className="w-[1px] h-12 bg-white/20 overflow-hidden relative">
+        <div className="w-[1px] h-16 bg-ivory/20 overflow-hidden relative">
             <motion.div 
-                className="w-full h-1/2 bg-gold absolute top-0"
+                className="w-full h-1/2 bg-ivory absolute top-0"
                 animate={{ top: ["-50%", "100%"] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
         </div>
+        <span className="text-micro text-ivory/40 tracking-[0.3em] uppercase">Scroll</span>
       </motion.div>
     </section>
   );
