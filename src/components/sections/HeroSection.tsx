@@ -15,7 +15,7 @@ export function HeroSection() {
           fill
           sizes="100vw"
           priority
-          className="object-cover object-center"
+          className="object-cover object-right md:object-center"
           quality={100}
         />
         {/* Uniform subtle darkening overlay to ensure white text pops everywhere */}
