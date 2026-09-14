@@ -1,8 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 const products = [
   {
@@ -23,31 +26,108 @@ const products = [
 ];
 
 export function ProductsSection() {
+  const container = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Title animation
+    gsap.fromTo(".prod-header",
+      { autoAlpha: 0, y: 20 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".prod-header",
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Bottle Image animation
+    gsap.fromTo(".prod-bottle",
+      { autoAlpha: 0, filter: "blur(10px)", x: -30 },
+      {
+        autoAlpha: 1,
+        filter: "blur(0px)",
+        x: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".prod-bottle",
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Products List container
+    gsap.fromTo(".prod-list-container",
+      { autoAlpha: 0, x: 30 },
+      {
+        autoAlpha: 1,
+        x: 0,
+        duration: 1.2,
+        delay: 0.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".prod-list-container",
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Staggered list items
+    gsap.fromTo(".prod-item",
+      { autoAlpha: 0, y: 20 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        delay: 0.5, // Start after container animates in
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".prod-list-container",
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Bottom info text
+    gsap.fromTo(".prod-info",
+      { autoAlpha: 0 },
+      {
+        autoAlpha: 1,
+        duration: 1,
+        delay: 1,
+        scrollTrigger: {
+          trigger: ".prod-list-container",
+          start: "top 85%",
+        }
+      }
+    );
+
+  }, { scope: container });
+
   return (
-    <section id="products" className="py-32 md:py-48 bg-ivory text-pure-black overflow-hidden">
+    <section ref={container} id="products" className="py-32 md:py-48 bg-ivory text-pure-black overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1 }}
-          className="text-center mb-24 md:mb-32"
+        <div
+          className="prod-header invisible text-center mb-24 md:mb-32"
         >
           <h3 className="text-micro text-pure-black/50 mb-8 uppercase tracking-widest">Our Water</h3>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light tracking-tight">
             Choose the bottle that <br />
             <span className="text-pure-black">fits your day.</span>
           </h2>
-        </motion.div>
+        </div>
 
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative">
           {/* Left: Single Large Bottle Image */}
-          <motion.div 
-            initial={{ opacity: 0, filter: "blur(10px)", x: -30 }}
-            whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full lg:w-1/2 relative flex justify-center lg:justify-end"
+          <div 
+            className="prod-bottle invisible w-full lg:w-1/2 relative flex justify-center lg:justify-end"
           >
             <div className="relative w-[70%] lg:w-[80%] aspect-[1/2] max-h-[80vh]">
               <Image
@@ -59,25 +139,17 @@ export function ProductsSection() {
                 priority
               />
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: Products & Prices List */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full lg:w-1/2 flex flex-col justify-center"
+          <div 
+            className="prod-list-container invisible w-full lg:w-1/2 flex flex-col justify-center"
           >
             <div className="flex flex-col gap-10 w-full max-w-md mx-auto lg:mx-0">
               {products.map((product, index) => (
-                <motion.div 
+                <div 
                   key={product.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3 + index * 0.15 }}
-                  className="group relative"
+                  className="prod-item invisible group relative"
                 >
                   <Link 
                     href={`https://wa.me/918979776596?text=Hi Aqua Mountain, I'd like to order the ${product.size} bottle.`}
@@ -96,24 +168,20 @@ export function ProductsSection() {
                     {/* Hover state line */}
                     <div className="absolute bottom-0 left-0 h-[1px] bg-pure-black w-0 group-hover:w-full transition-all duration-700 ease-out z-20"></div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
               
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="mt-8 pt-8 flex flex-col"
+              <div
+                className="prod-info invisible mt-8 pt-8 flex flex-col"
               >
                 <p className="text-sm text-pure-black/50 leading-relaxed">
                   Click on any size to place an order via WhatsApp. 
                   <br className="hidden md:block" />
                   Free delivery on all orders above ₹100.
                 </p>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

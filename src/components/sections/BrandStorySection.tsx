@@ -1,17 +1,78 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 export function BrandStorySection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Text Content Animation
+    gsap.fromTo(".bs-text",
+      { autoAlpha: 0, x: -30 },
+      {
+        autoAlpha: 1,
+        x: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".bs-text",
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Image Container Animation
+    gsap.fromTo(".bs-image-container",
+      { autoAlpha: 0, scale: 0.95 },
+      {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 1.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".bs-image-container",
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Image Parallax Effect
+    gsap.fromTo(".bs-image-parallax",
+      { y: "-10%" },
+      {
+        y: "10%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      }
+    );
+
+    // Annotation Animation
+    gsap.fromTo(".bs-annotation",
+      { autoAlpha: 0, y: 20 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.8,
+        scrollTrigger: {
+          trigger: ".bs-image-container",
+          start: "top 85%",
+        }
+      }
+    );
+
+  }, { scope: containerRef });
 
   return (
     <section ref={containerRef} className="py-24 md:py-40 bg-ivory text-pure-black relative overflow-hidden">
@@ -20,11 +81,8 @@ export function BrandStorySection() {
           
           {/* Text Content */}
           <div className="w-full lg:w-5/12 z-10 flex flex-col justify-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            <div
+              className="bs-text invisible"
             >
               <div className="flex items-center gap-4 mb-8">
                 <span className="w-8 h-[1px] bg-gold"></span>
@@ -52,19 +110,15 @@ export function BrandStorySection() {
                   <p className="text-[10px] uppercase tracking-widest text-pure-black/50">Perfect pH Level</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Image Content */}
           <div className="w-full lg:w-7/12 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className="relative w-full aspect-[4/5] md:aspect-[3/4] lg:aspect-square overflow-hidden"
+            <div
+              className="bs-image-container invisible relative w-full aspect-[4/5] md:aspect-[3/4] lg:aspect-square overflow-hidden"
             >
-              <motion.div style={{ y }} className="absolute -inset-[20%] w-[140%] h-[140%]">
+              <div className="bs-image-parallax absolute -inset-[20%] w-[140%] h-[140%]">
                 <Image
                   src="/images/pure-water-source.jpg"
                   alt="Crystal clear water source"
@@ -72,24 +126,20 @@ export function BrandStorySection() {
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 60vw"
                 />
-              </motion.div>
+              </div>
               
               {/* Overlay styling for depth */}
               <div className="absolute inset-0 border border-pure-black/5 z-10"></div>
               
               {/* Annotation */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-white/90 backdrop-blur-md p-5 max-w-[200px] shadow-2xl z-20"
+              <div 
+                className="bs-annotation invisible absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-white/90 backdrop-blur-md p-5 max-w-[200px] shadow-2xl z-20"
               >
                 <div className="w-2 h-2 rounded-full bg-gold mb-3"></div>
                 <p className="text-xs font-medium text-pure-black uppercase tracking-wider mb-1">The Source</p>
                 <p className="text-[10px] text-pure-black/60 leading-tight">Protected mountain springs, untouched by time.</p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
             
             {/* Decorative background element */}
             <div className="absolute -top-12 -right-12 w-2/3 h-2/3 bg-charcoal/5 -z-10 hidden lg:block"></div>
