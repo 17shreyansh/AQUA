@@ -110,7 +110,7 @@ export function AboutSection() {
 
             {/* Floating badge */}
             <div
-              className="about-badge invisible absolute bottom-12 -right-4 md:-right-12 z-20 bg-white/90 backdrop-blur-md p-6 shadow-xl border border-white/20 max-w-[220px]"
+              className="about-badge invisible relative mt-8 mx-auto max-w-[260px] z-20 bg-white p-6 shadow-xl border border-pure-black/10 lg:absolute lg:mt-0 lg:mx-0 lg:bottom-12 lg:-right-12 lg:bg-white/90 lg:backdrop-blur-md lg:border-white/20 lg:max-w-[220px]"
             >
               <p className="text-xs uppercase tracking-widest text-pure-black/60 mb-2 font-medium">Est. 2026</p>
               <p className="text-sm font-light leading-snug">Defining a new standard in hydration and purity.</p>
